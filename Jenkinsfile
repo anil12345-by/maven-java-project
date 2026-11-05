@@ -34,4 +34,20 @@ pipeline {
             }
         }
     }
+    post {
+    success {
+        emailext(
+            to: 'aniladitya11d@gmail.com',
+            subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "Build completed successfully.\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nConsole: ${env.BUILD_URL}"
+        )
+    }
+    failure {
+        emailext(
+            to: 'aniladitya11d@gmail.com',
+            subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "Build failed.\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}\nConsole: ${env.BUILD_URL}"
+        )
+    }
+}
 }
